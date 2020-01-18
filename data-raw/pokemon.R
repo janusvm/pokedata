@@ -54,16 +54,26 @@ abilities_tbl <-
   do.call(bind_rows, .)
 
 # Table with egg groups
-egg_groups_html %>%
+egg_groups_tbl <-
+  egg_groups_html %>%
   html_node("table.sortable") %>%
   html_table() %>%
   setNames(c("ndexno", "img", "name", "egg_group1", "egg_group2")) %>%
   as_tibble() %>%
   mutate(
-    id = egg_groups_html %>% html_nodes("table.sortable img") %>% html_attr("src") %>% basename() %>% str_sub(end = -5),
-    egg_group2 = if_else(egg_group2 != "", egg_group2, NA_character_)
+    id = egg_groups_html %>% html_nodes("table.sortable img") %>% html_attr("src") %>% basename() %>% str_sub(end = -5)
   ) %>%
   select(id, starts_with("egg"))
 
+base_stats_tbl %>%
+  right_join(galar_dex_tbl, by = "id") %>%
+  left_join(abilities_tbl, by = "id") %>%
+  left_join(egg_groups_tbl, by = "id") %>%
+  select(id, ndexno, gdexno, name, alt, starts_with("type"), starts_with("egg"), starts_with("ability"), hp:spe, img) %>%
+  ## fill(starts_with("egg")) %>%
+  ## mutate(egg_group2 = if_else(egg_group2 != "", egg_group2, NA_character_)) %>%
+  filter(is.na(img))
+
+# TODO: figure out what to do about alternate forms that only appear in one table
 # TODO: collect tables into one `pokemon` table
-usethis::use_data("pokemon", overwrite = TRUE)
+## usethis::use_data("pokemon", overwrite = TRUE)
