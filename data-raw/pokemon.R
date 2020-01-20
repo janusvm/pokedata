@@ -55,6 +55,7 @@ abilities_tbl <-
           ndexno = as.integer(ndexno),
           img    = html_nodes(.x, "img") %>% html_attr("src")
         ) %>%
+        filter(name != "Spiky-eared Pichu") %>%  # Only alt form that uses same sprite
         select(ndexno, img, starts_with("ability")) %>%
         as_tibble()
       ) %>%
@@ -88,16 +89,19 @@ del_forms <- c(
   "025OMS",
   "025HMS",
   "025SMS",
+  "025UMS",
   "025KMS",
   "025AMS",
+  "025PMS",
   "077MS",
-  "078MS",
+  "078XYMS",
   "083MS",
   "110MS",
   "122XYMS",
   "222MS",
   "263MS",
   "264MS",
+  "421SMS",
   "422MS",
   "423MS",
   "554MS",
