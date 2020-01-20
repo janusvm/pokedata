@@ -119,7 +119,10 @@ pokemon <-
   form_join(galar_dex_tbl) %>%
   form_join(egg_groups_tbl) %>%
   mutate_if(is.character, ~ if_else(. != "", str_replace(., "\\*", ""), NA_character_)) %>%
-  mutate(id = basename(img) %>% str_sub(end = -5)) %>%
+  mutate(
+    id  = basename(img) %>% str_sub(end = -5),
+    img = str_c("https:", img)
+  ) %>%
   select(id, ndexno, gdexno, name, alt, hp:spe, starts_with("ability"), starts_with("type"), starts_with("egg"), img) %>%
   arrange(ndexno, name) %>%
   group_by(ndexno) %>%
