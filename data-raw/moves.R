@@ -6,8 +6,8 @@ library(rvest)
 base_url <- "https://bulbapedia.bulbagarden.net/wiki/"
 
 gen8_moves_html  <- read_html(str_c(base_url, "List_of_moves_by_availability_(Generation_VIII)"))
-tms_html         <- read_html(str_c(base_url, "TM"))
-trs_html         <- read_html(str_c(base_url, "TR"))
+tm_moves_html    <- read_html(str_c(base_url, "TM"))
+tr_moves_html    <- read_html(str_c(base_url, "TR"))
 tutor_moves_html <- read_html(str_c(base_url, "Move_Tutor"))
 
 
@@ -27,7 +27,7 @@ moves <-
   as_tibble()
 
 tm_moves <-
-  tms_html %>%
+  tm_moves_html %>%
   html_nodes("table.roundtable") %>%
   .[[9]] %>%
   html_table() %>%
@@ -36,7 +36,7 @@ tm_moves <-
   select(tmno, name)
 
 tr_moves <-
-  trs_html %>%
+  tr_moves_html %>%
   html_node("table.roundtable") %>%
   html_table() %>%
   setNames(c("trno", "name", "type", "category")) %>%
