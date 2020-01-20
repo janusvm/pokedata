@@ -135,4 +135,4 @@ pokemon <-
   arrange(gdexno)
 
 
-usethis::use_data("pokemon", overwrite = TRUE)
+usethis::use_data(pokemon, overwrite = TRUE)
