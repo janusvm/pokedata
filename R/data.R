@@ -37,3 +37,61 @@ NULL
 #'   \item \url{https://bulbapedia.bulbagarden.net/wiki/List_of_Pokémon_by_Egg_Group}
 #' }
 "pokemon"
+
+#' Moves
+#'
+#' Pokémon moves available in Pokémon Sword & Shield.
+#'
+#' @format A data frame with 652 rows and 6 variables:
+#' \describe{
+#'   \item{name}{name of the move}
+#'   \item{type}{type of the move}
+#'   \item{category}{whether the move is a physical, special, or status move}
+#'   \item{pp}{base Power Points of the move}
+#'   \item{power}{Base Power, if it is a damaging move}
+#'   \item{accuracy}{accuracy of the move (in percentage)}
+#' }
+#'
+#' @source \url{https://bulbapedia.bulbagarden.net/wiki/List_of_moves_by_availability_(Generation_VIII)}
+"moves"
+
+#' TM Moves
+#'
+#' Moves that are available via Technical Machines (TM).
+#'
+#' @format A data frame with 100 rows and 2 variables:
+#' \describe{
+#'   \item{tmno}{number of the TM}
+#'   \item{name}{name of the move}
+#' }
+#'
+#' @source \url{https://bulbapedia.bulbagarden.net/wiki/TM}
+"tm_moves"
+
+
+#' TR Moves
+#'
+#' Moves that are available via Technical Records (TR).
+#'
+#' @format A data frame with 100 rows and 2 variables:
+#' \describe{
+#'   \item{trno}{number of the TR}
+#'   \item{name}{name of the move}
+#' }
+#'
+#' @source \url{https://bulbapedia.bulbagarden.net/wiki/TR}
+"tr_moves"
+
+
+#' Tutor Moves
+#'
+#' Moves that are available via Move Tutor.
+#'
+#' @format A data frame with 8 rows and 2 variables:
+#' \describe{
+#'   \item{name}{name of the move}
+#'   \item{location}{in-game location of the tutor teaching the move}
+#' }
+#'
+#' @source \url{https://bulbapedia.bulbagarden.net/wiki/Move_Tutor}
+"tutor_moves"
