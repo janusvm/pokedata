@@ -20,6 +20,7 @@ moves <-
   setNames(c("id", "name", "type", "category", "pp", "power", "accuracy", "swsh")) %>%
   filter(swsh != "") %>%
   mutate(
+    pp       = as.integer(pp),
     power    = as.integer(power),
     accuracy = as.integer(str_sub(accuracy, end = -2))
   ) %>%
