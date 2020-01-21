@@ -4,11 +4,10 @@
 \name{pokemon}
 \alias{pokemon}
 \title{Pokémon}
-\format{A data frame with 429 rows and 19 variables:
+\format{A data frame with 424 rows and 23 variables:
 \describe{
-  \item{id}{unique identifier}
-  \item{ndexno}{national Pokédex number}
   \item{gdexno}{Galar Pokédex number}
+  \item{ndexno}{national Pokédex number}
   \item{name}{name of the Pokémon}
   \item{alt}{name of the Pokémon's form, if it has alternate forms}
   \item{hp}{base HP}
@@ -24,6 +23,11 @@
   \item{type2}{secondary type, if it has one}
   \item{egg_group1}{primary egg group}
   \item{egg_group2}{secondary egg group, if it has one}
+  \item{level_moves}{moves learnt on levelup, evolution, or form change}
+  \item{tm_moves}{moves learnt from Technical Machines (TMs)}
+  \item{tr_moves}{moves learnt from Technical Records (TRs)}
+  \item{egg_moves}{moves learnt through breeding}
+  \item{tutor_moves}{moves learnt from Move Tutors}
   \item{img}{URL for in-game sprite}
 }}
 \source{

@@ -1,8 +1,14 @@
 library(tidyverse)
 library(rvest)
+library(here)
 
 
-# Download data ---------------------------------------------------------------
+# Prerequisites ----------------------------------------------------------------
+if (!exists("learnsets"))
+  source(here("data-raw", "learnsets.R"))
+
+
+# Download data ----------------------------------------------------------------
 base_url <- "https://bulbapedia.bulbagarden.net/wiki/"
 
 # Load wiki pages
@@ -127,10 +133,10 @@ pokemon <-
     id  = basename(img) %>% str_sub(end = -5),
     img = str_c("https:", img)
   ) %>%
-  select(id, ndexno, gdexno, name, alt, hp:spe, starts_with("ability"), starts_with("type"), starts_with("egg"), img) %>%
   arrange(ndexno, name) %>%
   group_by(ndexno) %>%
-  fill(gdexno:name, hp:egg_group2) %>%
+  fill(gdexno, name, hp:spe,
+       starts_with("ability"), starts_with("type"), starts_with("egg_group")) %>%
   rowwise() %>%
   mutate(alt = if_else(is.na(alt), miss_forms[id], alt)) %>%
   ungroup() %>%
@@ -139,7 +145,11 @@ pokemon <-
     !id %in% del_forms,
     is.na(alt) | !grepl("Mega|Partner|Alolan", alt)
   ) %>%
-  arrange(gdexno)
+  arrange(gdexno) %>%
+  left_join(learnsets, by = "id") %>%
+  select(gdexno, ndexno, name, alt, hp:spe,
+         starts_with("ability"), starts_with("type"), starts_with("egg_group"),
+         level_moves, tm_moves, tr_moves, egg_moves, tutor_moves, img)
 
 
 usethis::use_data(pokemon, overwrite = TRUE)
